@@ -1,0 +1,564 @@
+```html
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Kay Jaja ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(-45deg,#ff758c,#ff7eb3,#ffc2d1,#ffdbe8);
+    background-size:400% 400%;
+    animation:bg 12s ease infinite;
+}
+
+@keyframes bg{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+.card{
+    width:90%;
+    max-width:700px;
+    background:white;
+    padding:35px;
+    border-radius:25px;
+    text-align:center;
+    box-shadow:0 15px 40px rgba(0,0,0,.15);
+    z-index:2;
+}
+
+h1{
+    color:#ff4d6d;
+    margin-bottom:15px;
+}
+
+#question{
+    font-size:24px;
+    margin-bottom:25px;
+}
+
+.buttons{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+button{
+    border:none;
+    padding:12px 22px;
+    border-radius:15px;
+    cursor:pointer;
+    font-size:17px;
+    transition:.3s;
+}
+
+#yesBtn{
+    background:#4CAF50;
+    color:white;
+}
+
+#maybeBtn{
+    background:#ffb703;
+    color:white;
+}
+
+#noBtn{
+    background:#ff4d6d;
+    color:white;
+}
+
+#messages{
+    margin-top:20px;
+    max-height:250px;
+    overflow-y:auto;
+}
+
+.note{
+    background:#ffe6ee;
+    padding:10px;
+    border-radius:12px;
+    margin-top:10px;
+    animation:fade .5s;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.heart{
+    position:absolute;
+    color:white;
+    opacity:.5;
+    animation:float linear infinite;
+}
+
+@keyframes float{
+    from{transform:translateY(100vh);}
+    to{transform:translateY(-120px);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>Hi Jaja ❤️</h1>
+
+<p id="question">
+Pwede ba kitang ligawan?
+</p>
+
+<div class="buttons">
+    <button id="yesBtn">Oo 💖</button>
+    <button id="maybeBtn">🤔 Pag-iisipan ko muna</button>
+    <button id="noBtn">Hindi 😅</button>
+</div>
+
+<div id="messages"></div>
+
+</div>
+
+<script>
+
+for(let i=0;i<40;i++){
+    let heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(15+Math.random()*20)+"px";
+    heart.style.animationDuration=(6+Math.random()*8)+"s";
+    document.body.appendChild(heart);
+}
+
+const messagesDiv=document.getElementById("messages");
+const noBtn=document.getElementById("noBtn");
+const yesBtn=document.getElementById("yesBtn");
+
+let count=0;
+
+const messages=[
+"🥺 Sigurado ka ba?",
+"❤️ Okay lang, pag-isipan mo muna.",
+"🌹 Hindi naman ako nagmamadali.",
+"😊 Kahit getting to know muna tayo.",
+"💕 Sana mabigyan mo ako ng chance.",
+"🥹 Promise, sincere ako.",
+"🤭 Mukhang matigas talaga ang ulo ng button na 'Hindi'.",
+"❤️ Baka gusto mo munang pag-isipan?"
+];
+
+noBtn.addEventListener("click",()=>{
+
+    if(count < messages.length){
+
+        const note=document.createElement("div");
+        note.className="note";
+        note.textContent=messages[count];
+        messagesDiv.appendChild(note);
+    }
+
+    count++;
+
+    yesBtn.style.transform=
+        `scale(${1+count*0.08})`;
+
+    noBtn.style.position="fixed";
+    noBtn.style.left=
+        Math.random()*(window.innerWidth-150)+"px";
+
+    noBtn.style.top=
+        Math.random()*(window.innerHeight-80)+"px";
+
+    if(count>=8){
+        noBtn.innerHTML="🤔 Pag-isipan Muna";
+        noBtn.style.background="#ffb703";
+    }
+});
+
+document.getElementById("maybeBtn").onclick=()=>{
+showEnding(
+"🤔",
+"Salamat!",
+"Okay lang. Hintayin ko ang sagot mo kapag handa ka na. 🌹❤️"
+);
+};
+
+yesBtn.onclick=()=>{
+showEnding(
+"🎉❤️",
+"Salamat, Jaja!",
+"Napakasaya ko ngayon. Maraming salamat sa pagbibigay sa akin ng pagkakataon na ligawan ka. Pangako, rerespetuhin at pahahalagahan kita. 🌹💕"
+);
+};
+
+function showEnding(icon,title,message){
+
+document.body.innerHTML=`
+<div style="
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+padding:30px;
+color:white;
+">
+
+<h1 style="font-size:70px">${icon}</h1>
+
+<h2 style="margin-top:15px">
+${title}
+</h2>
+
+<p style="
+max-width:700px;
+font-size:22px;
+line-height:1.8;
+margin-top:20px;
+">
+${message}
+</p>
+
+</div>
+`;
+
+setInterval(()=>{
+
+let h=document.createElement("div");
+
+h.innerHTML="💖";
+
+h.style.position="absolute";
+h.style.left=Math.random()*100+"vw";
+h.style.top="-50px";
+h.style.fontSize=(20+Math.random()*30)+"px";
+
+document.body.appendChild(h);
+
+h.animate(
+[
+{transform:"translateY(0)"},
+{transform:"translateY(120vh)"}
+],
+{
+duration:5000
+}
+);
+
+setTimeout(()=>h.remove(),5000);
+
+},150);
+}
+
+</script>
+
+</body>
+</html>
+```
+```html
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Kay Jaja ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(-45deg,#ff758c,#ff7eb3,#ffc2d1,#ffdbe8);
+    background-size:400% 400%;
+    animation:bg 12s ease infinite;
+}
+
+@keyframes bg{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+.card{
+    width:90%;
+    max-width:700px;
+    background:white;
+    padding:35px;
+    border-radius:25px;
+    text-align:center;
+    box-shadow:0 15px 40px rgba(0,0,0,.15);
+    z-index:2;
+}
+
+h1{
+    color:#ff4d6d;
+    margin-bottom:15px;
+}
+
+#question{
+    font-size:24px;
+    margin-bottom:25px;
+}
+
+.buttons{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+button{
+    border:none;
+    padding:12px 22px;
+    border-radius:15px;
+    cursor:pointer;
+    font-size:17px;
+    transition:.3s;
+}
+
+#yesBtn{
+    background:#4CAF50;
+    color:white;
+}
+
+#maybeBtn{
+    background:#ffb703;
+    color:white;
+}
+
+#noBtn{
+    background:#ff4d6d;
+    color:white;
+}
+
+#messages{
+    margin-top:20px;
+    max-height:250px;
+    overflow-y:auto;
+}
+
+.note{
+    background:#ffe6ee;
+    padding:10px;
+    border-radius:12px;
+    margin-top:10px;
+    animation:fade .5s;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.heart{
+    position:absolute;
+    color:white;
+    opacity:.5;
+    animation:float linear infinite;
+}
+
+@keyframes float{
+    from{transform:translateY(100vh);}
+    to{transform:translateY(-120px);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>Hi Jaja ❤️</h1>
+
+<p id="question">
+Pwede ba kitang ligawan?
+</p>
+
+<div class="buttons">
+    <button id="yesBtn">Oo 💖</button>
+    <button id="maybeBtn">🤔 Pag-iisipan ko muna</button>
+    <button id="noBtn">Hindi 😅</button>
+</div>
+
+<div id="messages"></div>
+
+</div>
+
+<script>
+
+for(let i=0;i<40;i++){
+    let heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(15+Math.random()*20)+"px";
+    heart.style.animationDuration=(6+Math.random()*8)+"s";
+    document.body.appendChild(heart);
+}
+
+const messagesDiv=document.getElementById("messages");
+const noBtn=document.getElementById("noBtn");
+const yesBtn=document.getElementById("yesBtn");
+
+let count=0;
+
+const messages=[
+"🥺 Sigurado ka ba?",
+"❤️ Okay lang, pag-isipan mo muna.",
+"🌹 Hindi naman ako nagmamadali.",
+"😊 Kahit getting to know muna tayo.",
+"💕 Sana mabigyan mo ako ng chance.",
+"🥹 Promise, sincere ako.",
+"🤭 Mukhang matigas talaga ang ulo ng button na 'Hindi'.",
+"❤️ Baka gusto mo munang pag-isipan?"
+];
+
+noBtn.addEventListener("click",()=>{
+
+    if(count < messages.length){
+
+        const note=document.createElement("div");
+        note.className="note";
+        note.textContent=messages[count];
+        messagesDiv.appendChild(note);
+    }
+
+    count++;
+
+    yesBtn.style.transform=
+        `scale(${1+count*0.08})`;
+
+    noBtn.style.position="fixed";
+    noBtn.style.left=
+        Math.random()*(window.innerWidth-150)+"px";
+
+    noBtn.style.top=
+        Math.random()*(window.innerHeight-80)+"px";
+
+    if(count>=8){
+        noBtn.innerHTML="🤔 Pag-isipan Muna";
+        noBtn.style.background="#ffb703";
+    }
+});
+
+document.getElementById("maybeBtn").onclick=()=>{
+showEnding(
+"🤔",
+"Salamat!",
+"Okay lang. Hintayin ko ang sagot mo kapag handa ka na. 🌹❤️"
+);
+};
+
+yesBtn.onclick=()=>{
+showEnding(
+"🎉❤️",
+"Salamat, Jaja!",
+"Napakasaya ko ngayon. Maraming salamat sa pagbibigay sa akin ng pagkakataon na ligawan ka. Pangako, rerespetuhin at pahahalagahan kita. 🌹💕"
+);
+};
+
+function showEnding(icon,title,message){
+
+document.body.innerHTML=`
+<div style="
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+padding:30px;
+color:white;
+">
+
+<h1 style="font-size:70px">${icon}</h1>
+
+<h2 style="margin-top:15px">
+${title}
+</h2>
+
+<p style="
+max-width:700px;
+font-size:22px;
+line-height:1.8;
+margin-top:20px;
+">
+${message}
+</p>
+
+</div>
+`;
+
+setInterval(()=>{
+
+let h=document.createElement("div");
+
+h.innerHTML="💖";
+
+h.style.position="absolute";
+h.style.left=Math.random()*100+"vw";
+h.style.top="-50px";
+h.style.fontSize=(20+Math.random()*30)+"px";
+
+document.body.appendChild(h);
+
+h.animate(
+[
+{transform:"translateY(0)"},
+{transform:"translateY(120vh)"}
+],
+{
+duration:5000
+}
+);
+
+setTimeout(()=>h.remove(),5000);
+
+},150);
+}
+
+</script>
+
+</body>
+</html>
+```
